@@ -8,7 +8,7 @@ const app = express();
 
 // Allow requests from your frontend dev server
 app.use(cors({
-  origin: 'https://jwt-auth-ebon.vercel.app',
+  origin: 'https://jwt-auth-7bo8czq5h-tasfin.vercel.app/',
   credentials: true,
 }));
 
