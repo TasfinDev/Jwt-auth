@@ -2,8 +2,9 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import {useAuth} from '../context/AuthContext.jsx';
 // Create a private axios instance
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 export const axiosPrivate = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: `${API_URL}`,
     withCredentials: true, // Crucial for sending/receiving cookies
     headers: { 'Content-Type': 'application/json' }
 });
@@ -38,7 +39,7 @@ export const useAxiosPrivate = () => {
 
                     try {
                         // Hit the refresh endpoint
-                        const response = await axios.get('http://localhost:3000/api/routes/refresh-token', {
+                        const response = await axios.get(`${API_URL}/api/routes/refresh-token`, {
                             withCredentials: true
                         });
                         

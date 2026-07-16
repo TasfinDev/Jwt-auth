@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useAuth} from './context/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
   const {accessToken, setAccessToken} = useAuth();
   const [form, setForm] = useState({
     email: "",
@@ -17,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     console.log("submit handler called");
     try {
-      const response = await axios.post("http://localhost:3000/api/routes/login", form, { withCredentials: true });
+      const response = await axios.post(`${API_URL}/api/routes/login`, form, { withCredentials: true });
       const token = response?.data?.accessToken;
       if (token) {
         setAccessToken(token);

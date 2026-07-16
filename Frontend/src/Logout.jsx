@@ -3,11 +3,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext.jsx';
 const Logout = () => {
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
     const navigate = useNavigate();
     const {accessToken, setAccessToken} = useAuth();
     const handleLogout = async () => {
         try {
-      const response = await axios.get("http://localhost:3000/api/routes/logout",{ withCredentials: true });
+      const response = await axios.get(`${API_URL}/api/routes/logout`,{ withCredentials: true });
        console.log("submit handler called");
        setAccessToken(null);
         navigate('/'); // Redirect to protected route after registration

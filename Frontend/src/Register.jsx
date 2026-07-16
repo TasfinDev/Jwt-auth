@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useAuth} from './context/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 const Register = () => {
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
   const {accessToken, setAccessToken} = useAuth();
   const [form, setForm] = useState({
     username: "",
@@ -19,7 +20,7 @@ const Register = () => {
     e.preventDefault();
     console.log("submit handler called");
     try {
-      const response = await axios.post("http://localhost:3000/api/routes/register", form, { withCredentials: true });
+      const response = await axios.post(`${API_URL}/api/routes/register`, form, { withCredentials: true });
       const token = response?.data?.accessToken;
       if (token) {
         setAccessToken(token);

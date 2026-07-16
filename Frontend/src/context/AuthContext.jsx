@@ -4,6 +4,7 @@ import axios from 'axios';
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
     const [accessToken, setAccessToken] = useState(null);
     const [loading, setLoading] = useState(true); // Prevents flash of unauthenticated UI
 
@@ -12,7 +13,7 @@ export const AuthProvider = ({ children }) => {
         const verifyRefreshToken = async () => {
             try {
                 // Send the request to backend; browser automatically attaches cookies
-                const response = await axios.get('http://localhost:3000/api/routes/refresh-token', {
+                const response = await axios.get(`${API_URL}/api/routes/refresh-token`, {
                     withCredentials: true,
                 });
                 setAccessToken(response.data.accessToken);
